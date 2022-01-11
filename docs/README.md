@@ -2,12 +2,20 @@
 
 ## 1. How to use?
 
-1. [As injectable JavaScript](#21-as-injectable-javascript)
-2. [As Chrome or Edge extension](#22-as-chrome-or-edge-extension)
+1. [As Chrome or Edge extension](#21-as-chrome-or-edge-extension)
+2. [As injectable JavaScript](#22-as-injectable-javascript)
 
 ---
 
 ## 2.1 As Chrome or Edge Extension
+
+Sample output
+<video controls>
+  <source src="https://user-images.githubusercontent.com/2135089/149009301-7619aef2-3aef-428d-a7c2-ec8d9c9a9c85.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+How to use the extension? 
 
 1. Download the extension `.zip` file from the release section.
 2. Unpack it and sideload it in Chrome or Edge browser.
