@@ -2,10 +2,17 @@
 
 ## 1. How to use?
 
-1. [As injectable JavaScript](#-2.1-as-injectable-javascript)
-2. [As Chrome or Edge extension](#-2.2-as-chrome-or-edge-extension)
+1. [As injectable JavaScript](#21-as-injectable-javascript)
+2. [As Chrome or Edge extension](#22-as-chrome-or-edge-extension)
 
-## 2.1 As Injectable JavaScript
+---
+
+## 2.1 As Chrome or Edge Extension
+
+1. Download the extension `.zip` file from the release section.
+2. Unpack it and sideload it in Chrome or Edge browser.
+
+## 2.2 As Injectable JavaScript
 
 Sample output
 ![wordle-output](https://user-images.githubusercontent.com/2135089/148901799-a9248d0d-eb12-4aa1-ad92-7a7c0b040aa9.png)
@@ -28,7 +35,4 @@ How the run the code?
 
 **Note on security**: The js content that you paste in your browser's console does not make any remote requests to track you or send any information to any serve. Nothing evil goes in the script. 🚫😈
 
-## 2.2 As Chrome or Edge Extension
-
-1. Download the extension `.zip` file from the release section.
-2. Unpack it and sideload it in Chrome or Edge browser.
+---

@@ -10,16 +10,17 @@ function next() {
 }
 
 function processGameTiles() {
-    var rows = document.querySelector("body > game-app").shadowRoot.querySelectorAll("#board > game-row")
+  var rows = document.querySelector("body > game-app").shadowRoot.querySelectorAll("#board > game-row")
 
   for (i = 0; i < rows.length; i++) {
     var tiles = rows[i].shadowRoot.querySelectorAll("game-tile")
+
     tiles.forEach((x, i) => {
       var letter = x.getAttribute('letter')
-	
+  
       if (letter) {
         var evaluation = x.getAttribute('evaluation')
-		
+    
         if (letters[letter.charCodeAt() - 'a'.charCodeAt()] === null) {
           letters[letter.charCodeAt() - 'a'.charCodeAt()] = evaluation !== "absent"  
         }
@@ -34,23 +35,39 @@ function processGameTiles() {
 
 function reduceWordList() {
   var reducedWordList = []
+
   wordList.forEach(word => {
     if (word.split('').every(char => letters[char.charCodeAt() - 'a'.charCodeAt()] !== false)) {
       reducedWordList.push(word)
     }
   })
+
+  answer.forEach((char, i) => {
+    var temp = reducedWordList
+    reducedWordList = []
+    
+    if (char !== null) {
+      temp.forEach(word => {
+        if (word.charAt(i) === char) {
+          reducedWordList.push(word)
+        }
+      })
+    } else {
+      reducedWordList = temp
+    }
+  })
+
   return reducedWordList
 }
 
 function nextGuess(reducedWordList) {
-
   if (answer.every(char => char !== null)) {
       return answer.join('')
   }
 
   var nextGuess = ''
   var maxNewLetters = 0
-  
+
   reducedWordList.forEach(word => {
     var newLetters = 0
     word.split('').forEach((char, i) => {
@@ -60,8 +77,8 @@ function nextGuess(reducedWordList) {
         }
 
         if (newLetters > maxNewLetters) {
-          maxNewLetters = newLetters
           nextGuess = word
+          maxNewLetters = newLetters
         }
       }
     })
