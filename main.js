@@ -2,6 +2,7 @@ var wordList =["aback","abase","abate","abaya","abbey","abbot","abets","abhor","
 
 var letters = new Array(26).fill(null)
 var answer = new Array(5).fill(null)
+var guessedWords = []
 
 function next() {
   processGameTiles()
@@ -13,6 +14,9 @@ function processGameTiles() {
   var rows = document.querySelector("body > game-app").shadowRoot.querySelectorAll("#board > game-row")
 
   for (i = 0; i < rows.length; i++) {
+    var guessed = rows[i].getAttribute('letters')
+    if(guessed)
+        guessedWords.push(guessed)
     var tiles = rows[i].shadowRoot.querySelectorAll("game-tile")
 
     tiles.forEach((x, i) => {
@@ -35,7 +39,7 @@ function processGameTiles() {
 
 function reduceWordList() {
   var reducedWordList = []
-
+  
   wordList.forEach(word => {
     if (word.split('').every(char => letters[char.charCodeAt() - 'a'.charCodeAt()] !== false)) {
       reducedWordList.push(word)
@@ -57,6 +61,13 @@ function reduceWordList() {
     }
   })
 
+  guessedWords.forEach(word => { 
+    var index = reducedWordList.indexOf(word)
+    if (index > -1) 
+      reducedWordList.splice(index, 1)
+  })
+
+  console.log(reducedWordList)
   return reducedWordList
 }
 
@@ -66,7 +77,7 @@ function nextGuess(reducedWordList) {
   }
 
   var nextGuess = ''
-  var maxNewLetters = 0
+  var maxNewLetters = -1
 
   reducedWordList.forEach(word => {
     var newLetters = 0
@@ -90,4 +101,5 @@ function nextGuess(reducedWordList) {
 function reset() {
   letters = new Array(26).fill(null)
   answer = new Array(5).fill(null)
+  guessedWords = []
 }
