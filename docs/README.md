@@ -1,11 +1,16 @@
 # Wordle Helper
+> helper to solve [Wordle](https://www.powerlanguage.co.uk/wordle/) puzzles.
+
+
+Download from 
+[![Get Wordle Helper from Edge Store](https://user-images.githubusercontent.com/585534/107280673-a5ece780-6a26-11eb-9cc7-9fa9f9f81180.png)](https://microsoftedge.microsoft.com/addons/detail/wordle-helper/agmadmhempamcgcambpeknmafnfopaje)
+
 
 ## 1. How to use?
 
 1. [As Chrome or Edge extension](#21-as-chrome-or-edge-extension)
 2. [As injectable JavaScript](#22-as-injectable-javascript)
 
----
 
 ## 2.1 As Chrome or Edge Extension
 

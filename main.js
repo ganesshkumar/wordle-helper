@@ -3,6 +3,8 @@ var wordList =["aback","abase","abate","abaya","abbey","abbot","abets","abhor","
 var letters = new Array(26).fill(null)
 var answer = new Array(5).fill(null)
 var guessedWords = []
+var wronglyPlacedLetters = new Array(5).fill(null)
+wronglyPlacedLetters.forEach((_, i) => wronglyPlacedLetters[i] = new Array(26).fill(false))
 
 function next() {
   processGameTiles()
@@ -25,12 +27,18 @@ function processGameTiles() {
       if (letter) {
         var evaluation = x.getAttribute('evaluation')
     
-        if (letters[letter.charCodeAt() - 'a'.charCodeAt()] === null) {
-          letters[letter.charCodeAt() - 'a'.charCodeAt()] = evaluation !== "absent"  
+        if (letters[charToIndex(letter)] === null) {
+          letters[charToIndex(letter)] = evaluation !== "absent"  
+        } else if (letters[charToIndex(letter)] === false && (evaluation === "present" || evaluation === "correct")) {
+          letters[charToIndex(letter)] = true
         }
 
         if (evaluation === "correct") {
           answer[i] = letter
+        }
+
+        if (evaluation === "present") {
+          wronglyPlacedLetters[i][charToIndex(letter)] = true
         }
       }    
     })
@@ -41,7 +49,10 @@ function reduceWordList() {
   var reducedWordList = []
   
   wordList.forEach(word => {
-    if (word.split('').every(char => letters[char.charCodeAt() - 'a'.charCodeAt()] !== false)) {
+    var noAbsentLettersInWord = word.split('').every(char => letters[charToIndex(char)] !== false)
+    var noMisplacedLettersInWord = word.split('').map((char, i) => !wronglyPlacedLetters[i][charToIndex(char)]).every(value => value)
+
+    if (noAbsentLettersInWord && noMisplacedLettersInWord) {
       reducedWordList.push(word)
     }
   })
@@ -98,8 +109,14 @@ function nextGuess(reducedWordList) {
   return nextGuess
 }
 
+function charToIndex(char) {
+  return char.charCodeAt() - 'a'.charCodeAt()
+}
+
 function reset() {
   letters = new Array(26).fill(null)
   answer = new Array(5).fill(null)
   guessedWords = []
+  wronglyPlacedLetters = new Array(5).fill(null)
+  wronglyPlacedLetters.forEach((_, i) => wronglyPlacedLetters[i] = new Array(26).fill(false))
 }
